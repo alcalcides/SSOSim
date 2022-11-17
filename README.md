@@ -12,5 +12,5 @@ Simple Operating System Simulator
 	3. You can verify the "hello world" service with the following command, that should return "Hello, World!"
 	
 ```bash
-curl localhost:8080/hello && echo ""
+curl localhost:8080/api/hello-world && echo ""
 ```
