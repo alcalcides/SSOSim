@@ -15,4 +15,4 @@ Simple Operating System Simulator
 curl localhost:8080/api/hello-world && echo ""
 ```
 
-	4. Check documentation with [Swagger](http://localhost:8080/swagger-ui.html)
+	4. Check documentation with Swagger in the url http://localhost:8080/swagger-ui.html
