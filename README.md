@@ -13,12 +13,9 @@ Simple Operating System Simulator
 	
 ```bash
 curl localhost:8080/api/hello-world && echo ""
-<<<<<<< HEAD
-=======
 ```
 
 4. Check documentation with Swagger in the url [Documentation - Swagger](http://localhost:8080/swagger-ui.html)
 ```
 http://localhost:8080/swagger-ui.html
->>>>>>> feature/swagger
 ```
