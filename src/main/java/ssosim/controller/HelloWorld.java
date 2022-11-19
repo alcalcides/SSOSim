@@ -17,7 +17,7 @@ public class HelloWorld {
 	@GetMapping
 	@ApiOperation("Return \"Hello, World!\" to troubleshooting.")
 	public String hello() {
-		log.info("get /api/hello-world");
+		log.info(">> get /api/hello-world wohoooooooooooooooooooooo");
 		return String.format("Hello, World!");
 	}
 }
