@@ -13,7 +13,7 @@ public class OperatingSystem {
 	}
 
 	public OperatingSystem() {
-		log.info("creating operating system");
+		log.info(">> creating operating system");
 
 		ArrayList<Process> processes = new ArrayList<>();
 		processes.add(new Process(10));
