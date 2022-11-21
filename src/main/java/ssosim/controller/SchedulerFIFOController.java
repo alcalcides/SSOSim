@@ -24,14 +24,10 @@ public class SchedulerFIFOController {
 	public String powerOnSchedulerFIFO(@RequestBody ArrayList<OSProcess> processes) {
 		log.info(">> calling operating system with scheduler FIFO");
 
-		log.info(">> receive input data");
-
-		System.out.println(processes.get(0).getId());
-		System.out.println(processes.get(0).getExecutionTime());
-		System.out.println(processes.get(0).getArriveTime());
+		log.info(">> validate input data");
 
 		log.info(">> building OS");
-		OperatingSystem operatingSystem = new OperatingSystem();
+		OperatingSystem operatingSystem = new OperatingSystem(processes);
 
 		log.info(">> running OS");
 		operatingSystem.run();
