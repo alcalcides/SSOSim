@@ -7,10 +7,10 @@ import ssosim.domain.model.scheduler.SchedulerFIFO;
 
 public class ProcessManager {
 	private int quantum = 1;
-	private ArrayList<Process> processes;
+	private ArrayList<OSProcess> processes;
 	private Scheduler scheduler;
 
-	public ProcessManager(ArrayList<Process> processes) {
+	public ProcessManager(ArrayList<OSProcess> processes) {
 		this.processes = processes;
 		this.scheduler = new SchedulerFIFO();
 	}
@@ -23,11 +23,11 @@ public class ProcessManager {
 		return quantum;
 	}
 
-	public ArrayList<Process> getProcesses() {
+	public ArrayList<OSProcess> getProcesses() {
 		return processes;
 	}
 
-	public void setProcesses(ArrayList<Process> processes) {
+	public void setProcesses(ArrayList<OSProcess> processes) {
 		this.processes = processes;
 	}
 
