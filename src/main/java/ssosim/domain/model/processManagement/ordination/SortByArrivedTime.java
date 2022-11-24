@@ -1,6 +1,8 @@
-package ssosim.domain.model;
+package ssosim.domain.model.processManagement.ordination;
 
 import java.util.Comparator;
+
+import ssosim.domain.model.processManagement.OSProcess;
 
 public class SortByArrivedTime implements Comparator<OSProcess> {
 

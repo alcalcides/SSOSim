@@ -3,6 +3,9 @@ package ssosim.domain.model;
 import java.util.ArrayList;
 
 import lombok.extern.slf4j.Slf4j;
+import ssosim.domain.model.metaData.Journal;
+import ssosim.domain.model.processManagement.OSProcess;
+import ssosim.domain.model.processManagement.ProcessManager;
 
 @Slf4j
 public class OperatingSystem {
@@ -14,7 +17,7 @@ public class OperatingSystem {
 		processManager = new ProcessManager(processes);
 	}
 
-	public void run() {
-		processManager.run();
+	public Journal run() {
+		return processManager.run();
 	}
 }

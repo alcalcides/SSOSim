@@ -1,4 +1,4 @@
-package ssosim.domain.model;
+package ssosim.domain.model.processManagement;
 
 public class OSProcess {
 	private String id;
