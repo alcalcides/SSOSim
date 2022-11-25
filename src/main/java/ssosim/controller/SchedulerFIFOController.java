@@ -2,6 +2,8 @@ package ssosim.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class SchedulerFIFOController {
 
 	@PostMapping
 	@ApiOperation("Sort processes according the algorithm FIFO")
-	public ResponseEntity<Journal> powerOnSchedulerFIFO(@RequestBody ArrayList<OSProcess> processes) {
+	public ResponseEntity<Journal> powerOnSchedulerFIFO(@Valid @RequestBody ArrayList<OSProcess> processes) {
 		log.info(">> calling operating system with scheduler FIFO");
 
 		log.info(">> validate input data");
@@ -41,7 +43,6 @@ public class SchedulerFIFOController {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		
 		return new ResponseEntity<Journal>(report, headers, HttpStatus.ACCEPTED);
 	}
 
