@@ -5,6 +5,7 @@ public class OSProcess {
 	private int executionTime;
 	private int arriveTime;
 	private int remainingTime;
+	private int finishingTime;
 	private boolean fineshed;
 
 	public OSProcess(String id, int executionTime, int arriveTime) {
@@ -14,10 +15,12 @@ public class OSProcess {
 		setRemainingTime(executionTime);
 	}
 
-	public void run() {
+	public void run(int time) {
 		setRemainingTime(remainingTime - 1);
+		if (fineshed)
+			finishingTime = time;
 	}
-	
+
 	public void setRemainingTime(int remaingTime) {
 		if (remaingTime <= 0) {
 			this.remainingTime = 0;
@@ -47,6 +50,10 @@ public class OSProcess {
 
 	public boolean isFineshed() {
 		return fineshed;
+	}
+
+	public int getFinishTime() {
+		return finishingTime;
 	}
 
 }
