@@ -13,11 +13,10 @@ public class ProcessManager {
 		this.processes = processes;
 	}
 
-	public Journal run(Scheduler scheduler) {
-		Journal journal = scheduler.run(processes);
+	public void run(Scheduler scheduler, Journal journal) {
+		scheduler.run(processes, journal);
 		setTurnAround();
 		journal.setTurnAround(turnAround);
-		return journal;
 	}
 
 	private void setTurnAround() {

@@ -7,14 +7,20 @@ import ssosim.domain.model.scheduler.Scheduler;
 public class OperatingSystem {
 	private ProcessManager processManager;
 	private Scheduler scheduler;
+	private Journal journal;
 
 	public OperatingSystem(ProcessManager processManager, Scheduler scheduler) {
 		this.processManager = processManager;
 		this.scheduler = scheduler;
+		this.journal = new Journal();
 	}
 
-	public Journal run() {
-		return processManager.run(scheduler);
+	public void run() {
+		processManager.run(scheduler, journal);
+	}
+
+	public Journal getJournal() {
+		return journal;
 	}
 
 }

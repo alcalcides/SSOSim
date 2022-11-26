@@ -9,10 +9,10 @@ import ssosim.domain.model.processManagement.OSProcess;
 import ssosim.domain.model.scheduler.ordination.SortByArrivedTime;
 
 @Slf4j
-public class SchedulerFIFO extends Scheduler {
+public class SchedulerFIFO implements Scheduler {
 
 	@Override
-	public Journal run(ArrayList<OSProcess> processes) {
+	public void run(ArrayList<OSProcess> processes, Journal journal) {
 		log.info(">> SchedulerFIFO running");
 		Collections.sort(processes, new SortByArrivedTime());
 		int time = 0;
@@ -22,17 +22,14 @@ public class SchedulerFIFO extends Scheduler {
 				if (process.getArriveTime() <= time) {
 					log.info(">>> [" + time + "] runing " + process.getId());
 					process.run(time);
-					journalCPU.cpuReport(process.getId());
+					journal.cpuReport(process.getId());
 				} else {
 					log.info(">>> [" + time + "] idle");
-					journalCPU.cpuReport("idle");
+					journal.cpuReport("idle");
 				}
 				time++;
 			}
 		}
-
-		return journalCPU;
-
 	}
 
 }

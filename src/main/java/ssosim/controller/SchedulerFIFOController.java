@@ -33,15 +33,15 @@ public class SchedulerFIFOController {
 		OperatingSystem operatingSystem = new OperatingSystemAdapter().getOperatingSystem(input);
 
 		log.info(">> running OS");
-		Journal report = operatingSystem.run();
+		operatingSystem.run();
 
 		log.info(">> building response");
 		// code!
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		
-		return new ResponseEntity<Journal>(report, headers, HttpStatus.ACCEPTED);
+
+		return new ResponseEntity<Journal>(operatingSystem.getJournal(), headers, HttpStatus.ACCEPTED);
 	}
 
 }

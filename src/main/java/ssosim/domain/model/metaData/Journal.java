@@ -10,16 +10,16 @@ public class Journal {
 		schedulerSection.add(data);
 	}
 
+	public void setTurnAround(float turnAround) {
+		this.turnAround = turnAround;
+	}
+
 	public ArrayList<String> getSchedulerSection() {
 		return schedulerSection;
 	}
 
 	public float getTurnAround() {
 		return turnAround;
-	}
-
-	public void setTurnAround(float turnAround) {
-		this.turnAround = turnAround;
 	}
 
 }
