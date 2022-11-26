@@ -15,13 +15,22 @@ public class SchedulerFIFO extends Scheduler {
 	public Journal run(ArrayList<OSProcess> processes) {
 		log.info(">> SchedulerFIFO running");
 		Collections.sort(processes, new SortByArrivedTime());
-		processes.forEach(process -> {
-			while(!process.isFineshed()) {
-				log.info(">>> runing " + process.getId());
-				process.run();
-				journalCPU.cpuWrite(process.getId());
+		int time = 0;
+
+		for (OSProcess process : processes) {
+			while (!process.isFineshed()) {
+				if (process.getArriveTime() <= time) {
+					log.info(">>> [" + time + "] runing " + process.getId());
+					process.run(time);
+					journalCPU.cpuReport(process.getId());
+				} else {
+					log.info(">>> [" + time + "] idle");
+					journalCPU.cpuReport("idle");
+				}
+				time++;
 			}
-		});
+		}
+
 		return journalCPU;
 
 	}

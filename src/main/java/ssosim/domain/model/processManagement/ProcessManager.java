@@ -1,7 +1,6 @@
 package ssosim.domain.model.processManagement;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 import ssosim.domain.model.metaData.Journal;
 import ssosim.domain.model.processManagement.scheduler.Scheduler;
@@ -18,7 +17,17 @@ public class ProcessManager {
 	}
 
 	public Journal run() {
-		return scheduler.run(processes);
+		Journal journalCPU = scheduler.run(processes);
+
+		float turnAround = 0.0f;
+		for (OSProcess process : processes) {
+			turnAround += process.getFinishTime() - process.getArriveTime();
+		}
+		turnAround /= processes.size();
+
+		journalCPU.setTurnAround(turnAround);
+
+		return journalCPU;
 	}
 
 	public int getQuantum() {
@@ -35,22 +44,6 @@ public class ProcessManager {
 
 	public Scheduler getScheduler() {
 		return scheduler;
-	}
-
-	public boolean isFineshed() {
-		ListIterator<OSProcess> i = processes.listIterator();
-		while (i.hasNext()) {
-			if (i.next().isFineshed()) {
-				i.remove();
-			}
-		}
-
-		if (processes.isEmpty()) {
-			return true;
-		} else {
-			return false;
-		}
-
 	}
 
 }

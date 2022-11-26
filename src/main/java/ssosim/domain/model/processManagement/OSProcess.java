@@ -18,7 +18,7 @@ public class OSProcess {
 	public void run(int time) {
 		setRemainingTime(remainingTime - 1);
 		if (fineshed)
-			finishingTime = time;
+			finishingTime = time + 1;
 	}
 
 	public void setRemainingTime(int remaingTime) {
