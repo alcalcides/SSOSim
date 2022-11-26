@@ -16,7 +16,7 @@ public class ProcessManager {
 	public void run(Scheduler scheduler, Journal journal) {
 		scheduler.run(processes, journal);
 		setTurnAround();
-		journal.setTurnAroundSection(turnAround);
+		journal.turnAroundReport(turnAround);
 	}
 
 	private void setTurnAround() {

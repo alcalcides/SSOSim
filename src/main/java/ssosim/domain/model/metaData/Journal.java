@@ -10,7 +10,7 @@ public class Journal {
 		schedulerSection.add(data);
 	}
 
-	public void setTurnAroundSection(float turnAround) {
+	public void turnAroundReport(float turnAround) {
 		this.turnAroundSection = turnAround;
 	}
 
