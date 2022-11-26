@@ -17,7 +17,7 @@ public class ProcessManager {
 	public Journal run() {
 		Journal journal = scheduler.run(processes);
 
-		float turnAround = 0.0f;
+		float turnAround = 0f;
 		for (OSProcess process : processes) {
 			turnAround += process.getFinishTime() - process.getArriveTime();
 		}
