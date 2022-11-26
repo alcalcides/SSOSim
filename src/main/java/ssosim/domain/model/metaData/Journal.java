@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Journal {
 	private ArrayList<String> schedulerSection = new ArrayList<>();
-	private float turnAround = 0f;
+	private float turnAroundSection = 0f;
 
 	public void cpuReport(String data) {
 		schedulerSection.add(data);
 	}
 
-	public void setTurnAround(float turnAround) {
-		this.turnAround = turnAround;
+	public void setTurnAroundSection(float turnAround) {
+		this.turnAroundSection = turnAround;
 	}
 
 	public ArrayList<String> getSchedulerSection() {
@@ -19,7 +19,7 @@ public class Journal {
 	}
 
 	public float getTurnAround() {
-		return turnAround;
+		return turnAroundSection;
 	}
 
 }
