@@ -3,37 +3,35 @@ package ssosim.domain.model.processManagement;
 import java.util.ArrayList;
 
 import ssosim.domain.model.metaData.Journal;
-import ssosim.domain.model.processManagement.scheduler.Scheduler;
+import ssosim.domain.model.scheduler.Scheduler;
 
 public class ProcessManager {
 	private ArrayList<OSProcess> processes;
-	private Scheduler scheduler;
+	private float turnAround;
 
-	public ProcessManager(ArrayList<OSProcess> processes, Scheduler scheduler) {
+	public ProcessManager(ArrayList<OSProcess> processes) {
 		this.processes = processes;
-		this.scheduler = scheduler;
 	}
 
-	public Journal run() {
+	public Journal run(Scheduler scheduler) {
 		Journal journal = scheduler.run(processes);
+		setTurnAround();
+		journal.setTurnAround(turnAround);
+		return journal;
+	}
 
-		float turnAround = 0f;
+	private void setTurnAround() {
+		turnAround = 0f;
+
 		for (OSProcess process : processes) {
 			turnAround += process.getFinishTime() - process.getArriveTime();
 		}
+
 		turnAround /= processes.size();
-
-		journal.setTurnAround(turnAround);
-
-		return journal;
 	}
 
 	public ArrayList<OSProcess> getProcesses() {
 		return processes;
-	}
-
-	public Scheduler getScheduler() {
-		return scheduler;
 	}
 
 }

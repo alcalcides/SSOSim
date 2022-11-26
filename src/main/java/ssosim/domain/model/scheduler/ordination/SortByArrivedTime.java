@@ -1,4 +1,4 @@
-package ssosim.domain.model.processManagement.ordination;
+package ssosim.domain.model.scheduler.ordination;
 
 import java.util.Comparator;
 

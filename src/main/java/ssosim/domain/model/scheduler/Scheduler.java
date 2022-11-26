@@ -1,4 +1,4 @@
-package ssosim.domain.model.processManagement.scheduler;
+package ssosim.domain.model.scheduler;
 
 import java.util.ArrayList;
 

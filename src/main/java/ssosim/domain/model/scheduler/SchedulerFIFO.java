@@ -1,4 +1,4 @@
-package ssosim.domain.model.processManagement.scheduler;
+package ssosim.domain.model.scheduler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
 import ssosim.domain.model.metaData.Journal;
 import ssosim.domain.model.processManagement.OSProcess;
-import ssosim.domain.model.processManagement.ordination.SortByArrivedTime;
+import ssosim.domain.model.scheduler.ordination.SortByArrivedTime;
 
 @Slf4j
 public class SchedulerFIFO extends Scheduler {
