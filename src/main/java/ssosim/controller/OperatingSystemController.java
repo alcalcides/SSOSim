@@ -42,9 +42,7 @@ public class OperatingSystemController {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-
 		return new ResponseEntity<Journal>(operatingSystem.getJournal(), headers, HttpStatus.ACCEPTED);
-
 	}
 
 }
