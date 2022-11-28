@@ -17,14 +17,14 @@ import ssosim.domain.model.OperatingSystem;
 import ssosim.domain.model.metaData.Journal;
 
 @RestController
-@RequestMapping("/api/scheduler/FIFO")
-@Api(description = "Operates FIFO on processes")
+@RequestMapping("/api/scheduler")
+@Api(description = "Simulates operating system algorithms")
 @Slf4j
-public class SchedulerFIFOController {
+public class OperatingSystemController {
 
 	@PostMapping
-	@ApiOperation("Sort processes according the algorithm FIFO")
-	public ResponseEntity<Journal> powerOnSchedulerFIFO(@RequestBody InputInterface input) {
+	@ApiOperation("Simulates an operating system running processes")
+	public ResponseEntity<Journal> powerOnOperatingSystem(@RequestBody InputInterface input) {
 		log.info(">> calling operating system with scheduler FIFO");
 
 		log.info(">> validate input data");
