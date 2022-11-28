@@ -1,5 +1,7 @@
 package ssosim.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class OperatingSystemController {
 
 	@PostMapping
 	@ApiOperation("Simulates an operating system running processes")
-	public ResponseEntity<Journal> powerOnOperatingSystem(@RequestBody InputInterface input) {
+	public ResponseEntity<Journal> powerOnOperatingSystem(@Valid @RequestBody InputInterface input) {
 		log.info(">> calling operating system with scheduler FIFO");
 
 		log.info(">> validate input data");
