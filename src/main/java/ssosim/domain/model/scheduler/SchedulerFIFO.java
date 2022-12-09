@@ -15,7 +15,7 @@ public class SchedulerFIFO implements Scheduler {
 		int time = 0;
 
 		for (OSProcess process : processes) {
-			while (!process.isFineshed()) {
+			while (process.isNotFineshed()) {
 				if (process.getArriveTime() <= time) {
 					log.info(">>> [" + time + "] runing " + process.getId());
 					process.run(time);

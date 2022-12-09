@@ -31,6 +31,10 @@ public class OSProcess {
 		}
 	}
 
+	public boolean isNotFineshed() {
+		return !isFineshed();
+	}
+
 	// Normal Getters
 	public String getId() {
 		return id;
