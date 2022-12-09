@@ -1,9 +1,11 @@
 package ssosim.domain.model.processManagement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ssosim.domain.model.metaData.Journal;
 import ssosim.domain.model.scheduler.Scheduler;
+import ssosim.domain.model.scheduler.ordination.SortByArrivedTime;
 
 public class ProcessManager {
 	private ArrayList<OSProcess> processes;
@@ -11,6 +13,11 @@ public class ProcessManager {
 
 	public ProcessManager(ArrayList<OSProcess> processes) {
 		this.processes = processes;
+		sortProcessesByArriveTime(processes);
+	}
+
+	private void sortProcessesByArriveTime(ArrayList<OSProcess> processes) {
+		Collections.sort(processes, new SortByArrivedTime());
 	}
 
 	public void run(Scheduler scheduler, Journal journal) {
