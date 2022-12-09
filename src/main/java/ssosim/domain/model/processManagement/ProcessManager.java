@@ -2,6 +2,7 @@ package ssosim.domain.model.processManagement;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 import ssosim.domain.model.metaData.Journal;
 import ssosim.domain.model.scheduler.Scheduler;
@@ -38,6 +39,17 @@ public class ProcessManager {
 
 	public ArrayList<OSProcess> getProcesses() {
 		return processes;
+	}
+
+	public static boolean isAllFineshed(ArrayList<OSProcess> processes) {
+		return processes.stream()
+				.filter(process -> process.isNotFineshed())
+				.collect(Collectors.toList())
+				.isEmpty();
+	}
+
+	public static boolean isNotAllFineshed(ArrayList<OSProcess> processes) {
+		return !isAllFineshed(processes);
 	}
 
 }
