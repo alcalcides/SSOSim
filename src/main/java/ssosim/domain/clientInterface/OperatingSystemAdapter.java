@@ -9,7 +9,7 @@ public class OperatingSystemAdapter {
 
 	public OperatingSystem getOperatingSystem(InputInterface input) {
 		ProcessManager processManager = new ProcessManager(new ProcessesAdapter().getProcesses(input.processes));
-		Scheduler scheduler = SchedulerFactory.getScheduler(input.schedulerName);
+		Scheduler scheduler = SchedulerFactory.getScheduler(input.schedulerName, input.quantum);
 		this.operatingSystem = new OperatingSystem(processManager, scheduler);
 		return operatingSystem;
 	}
