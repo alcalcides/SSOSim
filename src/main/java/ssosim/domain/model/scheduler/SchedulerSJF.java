@@ -6,11 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import ssosim.domain.model.metaData.Journal;
 import ssosim.domain.model.processManagement.OSProcess;
 import ssosim.domain.model.processManagement.ProcessManager;
-import ssosim.domain.model.processManagement.ReadyProcessQueue;
+import ssosim.domain.model.processManagement.ReadyProcessList;
 
 @Slf4j
 public class SchedulerSJF implements Scheduler {
-	private ReadyProcessQueue readyProcessesQueue;
+	private ReadyProcessList readyProcessesList;
 	private int time;
 
 	@Override
@@ -19,14 +19,14 @@ public class SchedulerSJF implements Scheduler {
 		time = 0;
 
 		while (ProcessManager.isNotAllFineshed(processes)) {
-			readyProcessesQueue = new ReadyProcessQueue(processes, time);
-			if (readyProcessesQueue.isEmpty()) {
+			readyProcessesList = new ReadyProcessList(processes, time);
+			if (readyProcessesList.isEmpty()) {
 				log.info(">>> [" + time + "] idle");
 				journal.cpuReport("idle");
 				time++;
 			} else {
-				readyProcessesQueue.sortByExecutionTime();
-				OSProcess process = readyProcessesQueue.getNext();
+				readyProcessesList.sortByExecutionTime();
+				OSProcess process = readyProcessesList.getNext();
 				while (!process.isFineshed()) {
 					log.info(">>> [" + time + "] runing " + process.getId());
 					process.run(time);
