@@ -13,9 +13,11 @@ import ssosim.domain.model.processManagement.ProcessManager;
 @Slf4j
 public class SchedulerRoundRobin extends PreemptiveScheduler {
 	private int time;
+	private Deque<String> ready;
 
 	public SchedulerRoundRobin(int quantum) {
 		super(quantum);
+		ready = new ArrayDeque<>();
 	}
 
 	@Override
@@ -23,29 +25,19 @@ public class SchedulerRoundRobin extends PreemptiveScheduler {
 		log.info(">> SchedulerRR running");
 		time = 0;
 		Integer quantum = super.quantum;
-
-		Deque<String> ready = new ArrayDeque<>();
-		processes.stream()
-			.filter(p -> p.getArriveTime() == 0)
-			.forEach(p -> ready.add(p.getId()));
+		loadFromArrived(processes, time);
 
 		while (ProcessManager.isNotAllFineshed(processes)) {
 			if (ready.isEmpty()) {
 				log.info(">>> [" + time + "] idle");
 				journal.cpuReport("idle");
-				
-				time++;
-				processes.stream().filter(p -> p.getArriveTime() == time).forEach(p -> {
-					ready.add(p.getId());
-				});
-			} else {
-				String nextProcessID = ready.poll();
-				OSProcess process = processes.stream()
-						.filter(p -> p.getId() == nextProcessID)
-						.collect(Collectors.toList())
-						.get(0);
 
+				time++;
+				loadFromArrived(processes, time);
+			} else {
+				OSProcess process = getNextProcess(processes);
 				Integer timeSlice = 0;
+
 				while (process.isNotFineshed() && timeSlice < quantum) {
 					log.info(">>> [" + time + "] runing " + process.getId());
 					process.run(time);
@@ -54,20 +46,41 @@ public class SchedulerRoundRobin extends PreemptiveScheduler {
 					log.info(">> timeSlice = " + String.valueOf(timeSlice));
 
 					time++;
-					processes.stream()
-						.filter(p -> p.getArriveTime() == time)
-						.forEach(p -> {
-							ready.add(p.getId());
-						});
+					loadFromArrived(processes, time);
 
 					if (timeSlice == quantum && process.isNotFineshed()) {
 						log.info(">> process is coming back to ready queue");
-						ready.addLast(process.getId());
+						enqueue(process);
 					}
 
 				}
 			}
 		}
+	}
+
+	private OSProcess getNextProcess(ArrayList<OSProcess> processes) {
+		String nextProcessID = dequeue();
+		OSProcess process = processes.stream()
+				.filter(p -> p.getId() == nextProcessID)
+				.collect(Collectors.toList())
+				.get(0);
+		return process;
+	}
+
+	private void enqueue(OSProcess process) {
+		ready.addLast(process.getId());
+	}
+
+	private String dequeue() {
+		return ready.poll();
+	}
+
+	private void loadFromArrived(ArrayList<OSProcess> processes, int time) {
+		processes.stream()
+			.filter(p -> p.getArriveTime() == time)
+			.forEach(p ->
+				ready.add(p.getId()
+			));
 	}
 
 }
