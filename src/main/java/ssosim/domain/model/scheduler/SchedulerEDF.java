@@ -23,7 +23,7 @@ public class SchedulerEDF extends PreemptiveScheduler {
 		log.info(">> SchedulerRR running");
 		time = 0;
 		Integer quantum = super.quantum;
-		ready.enqueueArrivedProcesses(processes, time);
+		ready.enqueueArrivedProcessesSortedByDeadline(processes, time);
 
 		while (ProcessManager.isNotAllFineshed(processes)) {
 			if (ready.isEmpty()) {
@@ -31,7 +31,7 @@ public class SchedulerEDF extends PreemptiveScheduler {
 				journal.cpuReport("idle");
 
 				time++;
-				ready.enqueueArrivedProcesses(processes, time);
+				ready.enqueueArrivedProcessesSortedByDeadline(processes, time);
 			} else {
 				OSProcess process = ready.getNextProcess(processes);
 				Integer timeSlice = 0;
@@ -44,10 +44,11 @@ public class SchedulerEDF extends PreemptiveScheduler {
 					log.info(">> timeSlice = " + String.valueOf(timeSlice));
 
 					time++;
-					ready.enqueueArrivedProcesses(processes, time);
+					ready.enqueueArrivedProcessesSortedByDeadline(processes, time);
 
 					if (timeSlice == quantum && process.isNotFineshed()) {
 						log.info(">> process is coming back to ready queue");
+//						ready.enqueueSortedByDeadline(process, processes);
 						ready.enqueue(process);
 					}
 
