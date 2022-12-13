@@ -13,7 +13,11 @@ public class ProcessesAdapter {
 
 	public ArrayList<OSProcess> getProcesses(ArrayList<OSProcessInput> processesInput) {
 		processesInput.forEach(processInput -> {
-			processes.add(new OSProcess(processInput.id, processInput.executionTime, processInput.arriveTime));
+			processes.add(new OSProcess(
+					processInput.id,
+					processInput.executionTime,
+					processInput.arriveTime,
+					processInput.deadline));
 		});
 
 		return processes;

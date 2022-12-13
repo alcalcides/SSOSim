@@ -7,12 +7,21 @@ public class OSProcess {
 	private int remainingTime;
 	private int finishingTime;
 	private boolean fineshed;
+	private int deadline;
 
 	public OSProcess(String id, int executionTime, int arriveTime) {
 		this.id = id;
 		this.executionTime = executionTime;
 		this.arriveTime = arriveTime;
 		setRemainingTime(executionTime);
+	}
+
+	public OSProcess(String id, int executionTime, int arriveTime, int deadline) {
+		this.id = id;
+		this.executionTime = executionTime;
+		this.arriveTime = arriveTime;
+		setRemainingTime(executionTime);
+		this.deadline = deadline;
 	}
 
 	public void run(int time) {
@@ -58,6 +67,10 @@ public class OSProcess {
 
 	public int getFinishTime() {
 		return finishingTime;
+	}
+
+	public int getDeadline() {
+		return deadline;
 	}
 
 }
